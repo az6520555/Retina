@@ -1,0 +1,14 @@
+2014-12-10
+* daqmx_Task.m
+add ChanType , ChanMeas to option.
+add some otherwise check to switch .
+add Current channel.
+todo check aibg NewData shape in multichannel,single mode. does need transpose ?
+
+2014-12-12
+* daqmx_Task.m
+ User should use method change timing, mode after object creation.
+note read() auto start() in fmode? write() will stop task in fmode now. <--where (141214)?
+
+2014-12-14
+* daqmx_Task.m
