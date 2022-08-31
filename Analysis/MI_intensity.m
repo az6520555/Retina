@@ -2,7 +2,7 @@
 clear all
 close all
 
-path='F:\§Úªº¶³ºÝµwºÐ\Retina exp\exp data\Sorted_final_data\20200318';
+path='\\192.168.0.102\Public\Retina\Chou\Exp\20220823\SplitData';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
@@ -20,7 +20,7 @@ cc=hsv(n_file);
 roi = [1:60];
 mkdir MIandSTA
 
-for z =[25] %
+for z =[2 3 4] % 
     file = all_file(z).name ;
     [pathstr, name, ext] = fileparts(file);
     directory = [pathstr,'\'];
