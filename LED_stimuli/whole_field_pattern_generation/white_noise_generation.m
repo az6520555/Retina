@@ -1,7 +1,7 @@
 % white noise stimulus
 clear
 close all
-savepath='\\192.168.0.102\Public\Retina\Chou\stimuli_data\White_noise';
+savepath='D:\Retina_data\20220901_stimuli\WN\';
 Tot=300;
 dt=0.05;
 x_rand=randn(1,Tot/dt);
