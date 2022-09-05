@@ -1,0 +1,29 @@
+% Calculate spike number according to stimuli sequence
+clear
+
+% load('\\192.168.0.102\Public\Retina\Chou\stimulus_saving\01-Sep-2022\stimuli_seq_01-Sep-2022_17-0.mat')
+% filename_part=cell(size(parameters,1),1);
+% for i=1:size(parameters,1)
+%     [path_part filename_part{i} ext_part]=fileparts(parameters(i,2));
+% end
+
+path_diode='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\01-Sep-2022\';
+path_data='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\SplitData\';
+cd(path_diode)
+all_file=dir('*.mat');
+recording_time=cell(length(all_file),1);
+for i=1:length(all_file)
+    recording_time{i}=all_file(i).date;
+end
+[time,t_ind]=sort(recording_time);
+
+% load exp data
+spike_numbers=zeros(length(all_file),60);
+for i=1:length(all_file)
+    load([path_data,all_file(t_ind(i)).name])
+    for j=1:60
+        spike_numbers(i,j)=length(Spikes{j});
+    end
+    plot(i*ones(1,60),spike_numbers,'o');hold on
+
+end

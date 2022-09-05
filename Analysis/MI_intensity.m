@@ -2,7 +2,7 @@
 clear all
 close all
 
-path='\\192.168.0.102\Public\Retina\Chou\Exp\20220823\SplitData';
+path='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\SplitData';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
@@ -20,7 +20,7 @@ cc=hsv(n_file);
 roi = [1:60];
 mkdir MIandSTA
 
-for z =[2 3 4] % 
+for z =[1:30] % 
     file = all_file(z).name ;
     [pathstr, name, ext] = fileparts(file);
     directory = [pathstr,'\'];
@@ -271,7 +271,7 @@ infor=[];co=[];
     
     end
     TimeShift=t;
-%     save([path,'\MIandSTA\',filename(1:end-4),'_MI.mat'],'MI','TimeShift')
+    save([path,'\MIandSTA\',filename(1:end-4),'_MI.mat'],'MI','TimeShift')
 end
 % 
 % BinningTime = [TimeStamps(1) : 0.6 : TimeStamps(end)];

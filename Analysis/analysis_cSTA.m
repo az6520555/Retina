@@ -1,7 +1,7 @@
 % Analysis STA experiment, by Rona
 clear all
 close all
-datapath='D:\Retina_data\troy\20211022\';
+datapath='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\SplitData\';
 cd(datapath);
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file); 
@@ -21,7 +21,7 @@ color1={[0 0.4470 0.7410],[0.8500 0.3250 0.0980],[0.9290 0.6940 0.1250],[0.4940 
 color2={[0.4660 0.6740 0.1880],[0.3010 0.7450 0.9330],[0.6350 0.0780 0.1840],[0 0 0]};
 mkdir MIandSTA
 
-for z = [24 25 26 27 28]
+for z = [23 24 25 26]
     clearvars -except all_file n_file z SamplingRate cc ey isi2 statispks statistime w fr information rr STA roi fignames date datapath Date
     file = all_file(z).name;
     [pathstr, name, ext] = fileparts(file);
