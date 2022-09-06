@@ -37,9 +37,9 @@ for z = [16:30]
         xlim([-1000 1000])
     end
     
-%     file_onoff='F:\§Úªº¶³ºİµwºĞ\Retina exp\exp data\¾ã²z\OnOff_index\20200318-onoff2-sort-unit2onoff_index.mat';
+%     file_onoff='F:\æˆ‘çš„é›²ç«¯ç¡¬ç¢Ÿ\Retina exp\exp data\æ•´ç†\OnOff_index\20200318-onoff2-sort-unit2onoff_index.mat';
 %     onoff_color(file_onoff)
-%     file_NP='F:\§Úªº¶³ºİµwºĞ\Retina exp\exp data\¾ã²z\NP_classification\20200318_OU_tau=op5_2_sort_unit2_MI_also_other_parameters.mat'
+%     file_NP='F:\æˆ‘çš„é›²ç«¯ç¡¬ç¢Ÿ\Retina exp\exp data\æ•´ç†\NP_classification\20200318_OU_tau=op5_2_sort_unit2_MI_also_other_parameters.mat'
 %     NPcolor(file_NP)
     
     %% plot singlechannel data
@@ -87,6 +87,6 @@ end
 
 %% save xls file
 % MI_savedata=[TS' MI_savedata];
-% path_data='F:\§Úªº¶³ºİµwºĞ\Retina exp\Retina as NGD paper submit\data';
+% path_data='F:\æˆ‘çš„é›²ç«¯ç¡¬ç¢Ÿ\Retina exp\Retina as NGD paper submit\data';
 % data_name='0419 data.xls'
 % writematrix(MI_savedata,fullfile(path_data,data_name))

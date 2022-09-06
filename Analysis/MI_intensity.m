@@ -20,7 +20,7 @@ cc=hsv(n_file);
 roi = [1:60];
 mkdir MIandSTA
 
-for z =[1:30] % 
+for z =[10 2 6] % 
     file = all_file(z).name ;
     [pathstr, name, ext] = fileparts(file);
     directory = [pathstr,'\'];
@@ -44,42 +44,15 @@ for z =[1:30] %
         TimeStamps(2)=TimeStamps(1)+200;
     end
 
-   %% diode as isi2
-%    load(['E:\google_rona\20170502\diode\diode_',filename]);
-%      [~,locs_a2]=findpeaks(diff(diff(a2)),'MINPEAKHEIGHT',5*std(diff(diff(a2))));
-%      TimeStamps_a2 = (locs_a2)/SamplingRate;
-% 
-% %     [b,a]=butter(2,60/20000,'low');
-% %     a_data2=filter(b,a,callumin)';
-% %     a_data2=eyf;
-%     isi = callumin_filter(TimeStamps_a2(1)*20000:TimeStamps_a2(end)*20000);
-% %     figure(z);autocorr(isi,100000);
+
     %% a_data as isi  %   a_data2=(a_data-32768)*0.1042;
     [b,a] = butter(2,50/20000,'low'); % set butter filter
     a_data2 = filter(b,a,a_data(1,:));
     isi = a_data2(TimeStamps(1)*20000:TimeStamps(length(TimeStamps))*20000);% figure;plot(isi);
     figure(2);plot(isi);hold on
  %% Spike process
- % if the data is sorted, you can load the sorted excel file here
-%    ss = [29,18,39,53,4,31,59,5,23,38,13,15,...
-%     42,37,21,17,55,35,28,9,47,54,10,34,...
-%     60,11,32,43,12,25,57,20,16,56,38,22,...
-%     8,48,46,30,2,40,44,3,33,52,19,24,...
-%     51,6,26,50,14,7,49,36,27,1,41,45];
-%     Spikes = {};
-%     xls = xlsread([filename(1:end-4),'.xls']);
-%     for j = 1:max(xls(:,1))
-%             temp = 0;
-%         for i = 1:length(xls)
-%             if xls(i,1) == j
-%                 temp = temp+1;
-%                 Spikes{ss(j)}(1,temp) = xls(i,2);
-%             end
-%         end
-%     end
-    % =================================================================
+
     Spikes=Spikes(1,:);
-    % ==================================================================
     
  
     BinningTime = [TimeStamps(1) : BinningInterval : TimeStamps(end)];
@@ -109,58 +82,6 @@ for z =[1:30] %
         isi2(temp) = find(X(jj)<intervals,1)-1; % stimulus for every 50ms
         inten(temp)= X(jj);
     end
-%     figure(z*10);autocorr(inten,100)
-% %     figure;hist(isi2,[1:states]);
-% %     figure(50);plot(isi2,'color',cc(z,:));hold on
-%% timewindow of stim %%%
-%     isi = TimeStamps(2:1:end) - TimeStamps(1:1:end-1); isi = isi*1000;  %for pseudo-period
-%     X = zeros(size(BinningTime));
-%     temp = 1;
-%     for ii = 1:length(X)
-%         if BinningTime(ii)<=TimeStamps(temp)
-%             X(ii) = isi(temp);%find(isi<TimeStamps(temp),1);
-%         else
-%             temp = temp + 1;
-%             if temp>length(isi); break; end
-%             X(ii) = isi(temp);
-%         end
-%     end
-% 
-%     m = mean(isi);  %% tt = abs(isi-m);  dev = max(tt(find(tt<300)));
-%     isi2=[];
-%     states=25;
-%     nX = sort(X);
-%     abin = length(nX)/states;
-%     intervals = [nX(1:abin:end) inf]; 
-%     for jj = 1:length(X)
-%         [a,b] = find(X(jj)<intervals,1); % stimulus for every 50ms
-%         isi2(jj) = b-1;
-%     end
-  %% state of changing rate %%% 
-%     isi3=[];isi4=[];
-%     temp=0;
-%     for j=1:BinningInterval*SamplingRate:length(isi)
-%         temp=temp+1;
-%         isi3(temp) = isi(j);
-%     end
-%     
-%     for i=1:length(isi3)-1
-%         isi4(i)=isi3(i+1)-isi3(i);
-%     end
-%     isi4 = smooth(isi4,10)';
-%     isi2=[];
-%     states=8;
-%     X=isi4;
-%     nX = sort(X);
-%     abin = length(nX)/states;
-%     intervals = [nX(1:abin:end) inf]; 
-%     temp=0;
-%     for jj = 1:length(X)
-%         temp=temp+1;
-%         isi2(temp) = find(X(jj)<intervals,1)-1; % stimulus for every 50ms
-%     end
-
-%     figure;hist(isi2,[1:states]);
 
 %% Mutual Information
 MI = cell(1,60); % create an array to save the MI data
@@ -271,7 +192,7 @@ infor=[];co=[];
     
     end
     TimeShift=t;
-    save([path,'\MIandSTA\',filename(1:end-4),'_MI.mat'],'MI','TimeShift')
+%     save([path,'\MIandSTA\',filename(1:end-4),'_MI.mat'],'MI','TimeShift')
 end
 % 
 % BinningTime = [TimeStamps(1) : 0.6 : TimeStamps(end)];
