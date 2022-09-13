@@ -2,12 +2,13 @@
 clear all
 close all
 
-path='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\SplitData';
+path='\\192.168.0.102\Public\Retina\Chou\Exp\20220907\SplitData';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
 SamplingRate=20000;
 cc=hsv(n_file);
+file_list=[15:18]
 
         rr =[9,17,25,33,41,49,...
           2,10,18,26,34,42,50,58,...
@@ -19,9 +20,12 @@ cc=hsv(n_file);
             16,24,32,40,48,56];
 roi = [1:60];
 mkdir MIandSTA
+colors_default={[0, 0.4470, 0.7410],[0.8500, 0.3250, 0.0980],[0.9290, 0.6940, 0.1250],[0.4940, 0.1840, 0.5560], ...
+    [0.4660, 0.6740, 0.1880],[0.3010, 0.7450, 0.9330],[0.6350, 0.0780, 0.1840]};
 
-for z =[10 2 6] % 
-    file = all_file(z).name ;
+
+for z =1:length(file_list) % 
+    file = all_file(file_list(z)).name ;
     [pathstr, name, ext] = fileparts(file);
     directory = [pathstr,'\'];
     filename = [name,ext];
@@ -169,7 +173,7 @@ infor=[];co=[];
     else
         
 %         yyaxis left
-        plot(t,information,'LineWidth',1,'LineStyle','-');%,'color',cc(z,:)
+        plot(t,information,'LineWidth',1,'LineStyle','-','color',colors_default{z});%,'color',cc(z,:)
 %         yyaxis right
 %         plot(t,corr,'LineWidth',2,'LineStyle','-')
 %         refline([0 0])
