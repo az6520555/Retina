@@ -1,8 +1,8 @@
-clear all
-MergeName='20210323MCDmerge.mat'; % mat file of offlinesorter output 
-ListName='20210323_list.txt'; % filenames list
-path='E:\Chou\chou20210323\'; % mat file directory of offlinesorter output 
-path_separated='E:\Chou\chou20210323\data'; % directory provided the filenames
+clear 
+MergeName='20220901_whole_field.mat'; % mat file of offlinesorter output 
+ListName='20220901_list.txt'; % filenames list
+path='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\'; % mat file directory of offlinesorter output 
+path_separated='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\SplitData\'; % directory providing the files (splitdata)
 load([path,MergeName])
 channel = [12,13,14,15,16,17,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,41,42,43,44,45,46,47,48,51,52,53,54,55,56,57,58,61,62,63,64,65,66,67,68,71,72,73,74,75,76,77,78,82,83,84,85,86,87];
 unit_number=4;

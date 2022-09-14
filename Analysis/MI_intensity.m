@@ -2,13 +2,13 @@
 clear all
 close all
 
-path='\\192.168.0.102\Public\Retina\Chou\Exp\20220907\SplitData';
+path='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\sorted_data_final';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
 SamplingRate=20000;
 cc=hsv(n_file);
-file_list=[15:18]
+file_list=1:n_file;
 
         rr =[9,17,25,33,41,49,...
           2,10,18,26,34,42,50,58,...
@@ -172,11 +172,7 @@ infor=[];co=[];
     if spikenumber==0
     else
         
-%         yyaxis left
         plot(t,information,'LineWidth',1,'LineStyle','-','color',colors_default{z});%,'color',cc(z,:)
-%         yyaxis right
-%         plot(t,corr,'LineWidth',2,'LineStyle','-')
-%         refline([0 0])
         xlim([-1000 1000])
 
 %         figure(2);hold on
@@ -196,7 +192,7 @@ infor=[];co=[];
     
     end
     TimeShift=t;
-%     save([path,'\MIandSTA\',filename(1:end-4),'_MI.mat'],'MI','TimeShift')
+    save([path,'\MIandSTA\',filename(1:end-4),'_MI.mat'],'MI','TimeShift')
 end
 % 
 % BinningTime = [TimeStamps(1) : 0.6 : TimeStamps(end)];

@@ -1,11 +1,12 @@
 % replace Spikes by sorted data
 clear 
-cd('E:\Chou\20200707\SplitData\'); % open original data
-path_sort=['E:\Chou\20200707\SplitData\sort\']; % sorted spikes data
-savepath=['F:\§Úªº¶³ºÝµwºÐ\Retina exp\exp data\Sorted_final_data\20200707\']; % new data
+cd('\\192.168.0.102\Public\Retina\Chou\Exp\20220901\SplitData\'); % open original data
+path_sort=['\\192.168.0.102\Public\Retina\Chou\Exp\20220901\sort\']; % sorted spikes data
+savepath=['\\192.168.0.102\Public\Retina\Chou\Exp\20220901\sorted_data_final\']; % new data
+mkdir(savepath)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file); 
-unit_number=3;  
+unit_number=4;  
 
 for z = 1:n_file
     file = all_file(z).name ;
