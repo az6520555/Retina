@@ -134,7 +134,7 @@ for z = 1:size(file_numbers,2)
     for nn = 1:length(roi)
         spike = BinningSpike(roi(nn),:);
 
-        window = 1;  %STA window
+        window = 2;  %STA window
         window2 = 1;
         sts = [];
         temp = 0;
