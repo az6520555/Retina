@@ -2,13 +2,13 @@
 clear all
 close all
 
-path='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\sorted_data_final';
+path='D:\Retina_data\troy\20211022';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
 SamplingRate=20000;
 cc=hsv(n_file);
-file_list=1:n_file;
+file_list=[9 4 10];
 
         rr =[9,17,25,33,41,49,...
           2,10,18,26,34,42,50,58,...

@@ -1,7 +1,7 @@
 clear all
-close all
+% close all
 
-path='\\192.168.0.102\Public\Retina\Chou\Exp\20220901\SplitData\MIandSTA';
+path='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\SplitData\MIandSTA';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
@@ -20,7 +20,7 @@ filelistMI=[];
 filelistSTA=[];
 MI_savedata=[];
 
-for z = [16:30]
+for z = []  % 5 9 13 17
     file = all_file(z).name;
     [pathstr, name, ext] = fileparts(file);
     directory = [pathstr,'\'];
@@ -30,7 +30,7 @@ for z = [16:30]
     TS=TimeShift;
     
     %% plot multichannel data
-    figure(1);
+    figure(2);
     for i=1:60
         subplot(8,8,rr(i));hold on;title(num2str(i))
         plot(TimeShift,MI{i},'LineWidth',1,'LineStyle','-');

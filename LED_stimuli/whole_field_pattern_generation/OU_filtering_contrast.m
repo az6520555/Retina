@@ -14,8 +14,7 @@ for i = 1:length(T)-1
     L(i+1) = L(i) + (-L(i)/tau + randn*sqrt(D/dt))*dt;
 end
 
-
-path='D:\Retina_data\20220901_stimuli\';
+path='\\192.168.0.102\Public\Retina\Chou\stimuli_data\20220916_stimuli\';
 figure(1);plot(T,L,'linewidth',1);xlabel('time (s)')
 cutoff=1;
 corrtimef=[];
@@ -33,8 +32,8 @@ plot(T(1:end+lags(I)),Lfshift,'linewidth',1)
 
 legend(('OU'),('LPOU f_c=1Hz'))
 %% generate stimulus
-mean_set=[1 4 7 10 15];
-C_set=[0.05,0.1,0.2,0.3];
+mean_set=[2 5 10 15];
+C_set=[0.05,0.1,0.15,0.2,0.3];
 
 figure(4);hold on;
 [t,ey,a2]=generate_stimulus(L,10,2,dt);  % (signal, mean intensity, times of std)

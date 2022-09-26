@@ -1,13 +1,13 @@
 % white noise stimulus
-clear
+clearvars -except L
 close all
-savepath='D:\Retina_data\20220901_stimuli\WN\';
+savepath='\\192.168.0.102\Public\Retina\Chou\stimuli_data\20220916_stimuli\';
 Tot=300;
 dt=0.05;
 x_rand=randn(1,Tot/dt);
 %% different mean different contrast 20211008
-mean_set=[1 4 7 10 15];
-C_set=[0.05,0.1,0.2,0.3];
+mean_set=[2 5 10 15];
+C_set=[0.05,0.1,0.15,0.2,0.3];
 
 for i=1:length(mean_set)
     figure(i*878);hold on

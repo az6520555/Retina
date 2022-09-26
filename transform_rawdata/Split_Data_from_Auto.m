@@ -1,8 +1,8 @@
 % split file
 clear
 close all
-path='\\192.168.0.102\Public\Retina\Chou\Exp\20220907\';
-load([path,'20220907_whole_field.mat'])
+path='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\';
+load([path,'20220916_whole_field.mat'])
 rate=20000;
 i=1;
 split_time=[];
