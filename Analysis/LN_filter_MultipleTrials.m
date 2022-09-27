@@ -1,7 +1,7 @@
 % Analysis STA experiment, by Rona
 clear all
 close all
-datapath='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\SplitData';
+datapath='G:\我的雲端硬碟\september_2022_expdata\20220901';
 cd(datapath);
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file); 
@@ -17,7 +17,7 @@ rr =    [9,17,25,33,41,49,...
       7,15,23,31,39,47,55,63,...
         16,24,32,40,48,56];
 roi = [1:60];
-file_numbers=[25:29]; % file selections 16 18 17 19 20;31 33 32 34 35;21 23 22 29 30
+file_numbers=[16 17 21 22]; % file selections 16 18 17 19 20;31 33 32 34 35;21 23 22 29 30
 
 colors_default={[0, 0.4470, 0.7410],[0.8500, 0.3250, 0.0980],[0.9290, 0.6940, 0.1250],[0.4940, 0.1840, 0.5560], ...
     [0.4660, 0.6740, 0.1880],[0.3010, 0.7450, 0.9330],[0.6350, 0.0780, 0.1840]};
@@ -53,13 +53,13 @@ for z = 1:size(file_numbers,2)
     % transform stimulus from volt to intensity
     inten=(inten-32768).*125*10^(-6); % transfrom from raw data of MCRack to output volt
 %   load calibration data
-    load('\\192.168.0.102\Public\Retina\Chou\Exp\20220916\16-Sep-2022\calibration\calibration_PAC_16-Sep-2022.mat')
-    inten=inten-offset;
-    Ip=inten/10.421/10^6;
-    r=0.37;
-    P=Ip/r;
-    A=13*10^-6;
-    inten=P/A*1000; % unit: mW/m^2
+%     load('\\192.168.0.102\Public\Retina\Chou\Exp\20220916\16-Sep-2022\calibration\calibration_PAC_16-Sep-2022.mat')
+%     inten=inten-offset;
+%     Ip=inten/10.421/10^6;
+%     r=0.37;
+%     P=Ip/r;
+%     A=13*10^-6;
+%     inten=P/A*1000; % unit: mW/m^2
    
 %% spike process
     BinningTime = [TimeStamps(1) : BinningInterval : TimeStamps(end)];
@@ -123,12 +123,9 @@ end
 
 %% calculate convoluted signal and obtain nonlinear filter
 channel=16;
-kt=STAAAAA{channel};
+kt=normalize(STAAAAA{channel});
 gt=conv(inten,kt(end:-1:1),'valid'); % (length(kt)-1) elements are dropped
-% figure;hold on
-% for i=1:10
-%     plot(gt(i:end),BinningSpike(channel,length(kt):end-i+1),'o')
-% end
 figure;hold on
-plot(normalize(gt))
-plot(normalize(inten(length(kt):end)))
+
+plot(gt(1:end),BinningSpike(channel,length(kt):end),'o')
+
