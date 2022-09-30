@@ -1,5 +1,5 @@
 clear all
-% close all
+close all
 
 path='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\SplitData\MIandSTA';
 cd(path)
@@ -20,7 +20,7 @@ filelistMI=[];
 filelistSTA=[];
 MI_savedata=[];
 
-for z = []  % 5 9 13 17
+for z = [1 3 2 4 5]  % 5 9 13 17
     file = all_file(z).name;
     [pathstr, name, ext] = fileparts(file);
     directory = [pathstr,'\'];
