@@ -115,10 +115,10 @@ for z = 1:length(file_numbers)
     end
     
     %% calculate convoluted signal and obtain nonlinear filter
-    channel=22;
+    channel=23;
     kt_set{z}=STAAAAA{channel}-mean(STAAAAA{channel});
 %     kt_set{z}=normalize(STAAAAA{channel});
-    gt=conv(inten,kt_set{z}(end:-1:1),'valid'); % (length(kt)-1) elements are dropped
+    gt=conv(normalize(inten),kt_set{z}(end:-1:1),'valid'); % (length(kt)-1) elements are dropped
     figure(2);hold on
     nonlinear_in(z,:)=gt(1:end);
     nonlinear_out(z,:)=BinningSpike(channel,length(kt_set{z}):end);
@@ -165,6 +165,6 @@ end
 plot(mean_gt_value(end,:),1:size(mean_gt_value,2),'o','linewidth',2)
 subplot(1,2,2);hold on
 for i=1:size(kt_set,2)
-    plot(kt_set{i}*mean_frac_NL(i))
+    plot(kt_set{i}*mean_frac_NL(i),'linewidth',2)
 end
 
