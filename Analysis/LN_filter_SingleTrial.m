@@ -1,7 +1,7 @@
 % Analysis STA experiment, by Rona
 clear all
 close all
-datapath='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\SplitData';
+datapath='G:\我的雲端硬碟\september_2022_expdata\20220916';
 cd(datapath);
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file); 
@@ -17,7 +17,7 @@ rr =    [9,17,25,33,41,49,...
       7,15,23,31,39,47,55,63,...
         16,24,32,40,48,56];
 roi = [1:60];
-file_numbers=[31 33 32 34 35]; % file selections 16 18 17 19 20;31 33 32 34 35;21 23 22 29 30
+file_numbers=[16 18 17 19 20]; % file selections 16 18 17 19 20;31 33 32 34 35;21 23 22 29 30
 
 colors_default={[0, 0.4470, 0.7410],[0.8500, 0.3250, 0.0980],[0.9290, 0.6940, 0.1250],[0.4940, 0.1840, 0.5560], ...
     [0.4660, 0.6740, 0.1880],[0.3010, 0.7450, 0.9330],[0.6350, 0.0780, 0.1840]};
@@ -54,7 +54,7 @@ for z = 1:length(file_numbers)
     % transform stimulus from volt to intensity
     inten=(inten-32768).*125*10^(-6); % transfrom from raw data of MCRack to output volt
 %   load calibration data
-    load('\\192.168.0.102\Public\Retina\Chou\Exp\20220916\16-Sep-2022\calibration\calibration_PAC_16-Sep-2022.mat')
+    load('G:\我的雲端硬碟\september_2022_expdata\20220916\calibration\calibration_PAC_16-Sep-2022.mat')
     inten=inten-offset;
     Ip=inten/10.421/10^6;
     r=0.37;
@@ -81,7 +81,7 @@ for z = 1:length(file_numbers)
     for nn = 1:length(roi)
         spike = BinningSpike(roi(nn),:);
     
-        window = 2;  %STA window
+        window = 1;  %STA window
         window2 = 0;
         sts = [];
         temp = 0;
@@ -103,7 +103,7 @@ for z = 1:length(file_numbers)
         t = [-window*1000:bin:window2*1000];
         sub1=subplot(8,8,rr(nn));
         try
-            plot(t,STA,'LineWidth',1);% ,'color',colors_default{z} ,'linestyle',ls_set{i_set}
+            plot(t,normalize(STA),'LineWidth',1);% ,'color',colors_default{z} ,'linestyle',ls_set{i_set}
         catch
         end
         title(num2str(nn))
@@ -115,7 +115,7 @@ for z = 1:length(file_numbers)
     end
     
     %% calculate convoluted signal and obtain nonlinear filter
-    channel=23;
+    channel=12;
     kt_set{z}=STAAAAA{channel}-mean(STAAAAA{channel});
 %     kt_set{z}=normalize(STAAAAA{channel});
     gt=conv(normalize(inten),kt_set{z}(end:-1:1),'valid'); % (length(kt)-1) elements are dropped
@@ -123,6 +123,8 @@ for z = 1:length(file_numbers)
     nonlinear_in(z,:)=gt(1:end);
     nonlinear_out(z,:)=BinningSpike(channel,length(kt_set{z}):end);
     plot(nonlinear_in(z,:),nonlinear_out(z,:)+(z-1)*0.1,'o')
+    xlabel('g(t)')
+    ylabel('N(g)')
     figure(3)
     subplot(2,1,1);hold on;plot(kt_set{z})
     subplot(2,1,2);hold on;plot(gt)
@@ -140,10 +142,13 @@ for nfile=1:length(file_numbers)
             std_gt_value(nfile,n_spike)=std(nonlinear_in(nfile,inds));
             mean_gt_value(nfile,n_spike)=mean(nonlinear_in(nfile,inds));
         end
-   
     end
+    mean_gt_value(mean_gt_value<0)=0;
     figure(4);hold on
     errorbar(mean_gt_value(nfile,:),1:size(mean_gt_value,2)+nfile*0.1,std_gt_value(nfile,:),'horizontal','o','linewidth',2)
+    xlabel('g(t)')
+    ylabel('N(g)')
+    title('errorbar of nonlinearity')
 end
 %% standardize the nonlinearity
 i=0;
@@ -154,17 +159,25 @@ while n_zero<1
     n_zero=length(ind_0);
     useful_states=i-1;
 end
-figure(5);subplot(1,2,1);hold on
+figure(5);subplot(1,2,1);hold on;box on
+title('mean nonlinear curve')
 fraction_NL=zeros(size(mean_gt_value,1)-1,useful_states);
 mean_frac_NL=ones(size(mean_gt_value,1),1);
 for j=1:size(mean_gt_value,1)-1
     fraction_NL(j,:)=mean_gt_value(end,1:useful_states)./mean_gt_value(j,1:useful_states);
     mean_frac_NL(j)=mean(fraction_NL(j,:));
-    plot(mean_gt_value(j,:)*mean_frac_NL(j),1:size(mean_gt_value,2),'o','linewidth',2)
+    plot(mean_gt_value(j,:)*mean_frac_NL(j),1:size(mean_gt_value,2),'-o','linewidth',2)
 end
-plot(mean_gt_value(end,:),1:size(mean_gt_value,2),'o','linewidth',2)
-subplot(1,2,2);hold on
+plot(mean_gt_value(end,:),1:size(mean_gt_value,2),'-o','linewidth',2)
+xlabel('g(t)')
+ylabel('N(g)')
+subplot(1,2,2);hold on;box on
 for i=1:size(kt_set,2)
-    plot(kt_set{i}*mean_frac_NL(i),'linewidth',2)
+    sta_temp=kt_set{i}*mean_frac_NL(i);
+    kernel=sta_temp(end:-1:1);
+    plot(kernel,'linewidth',2)
 end
+title('temporal kernel')
+xlim([0,30])
+xlabel('step')
 

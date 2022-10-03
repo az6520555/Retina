@@ -1,7 +1,7 @@
 clear all
 close all
 
-path='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\SplitData\MIandSTA';
+path='G:\我的雲端硬碟\september_2022_expdata\20220916\MIandSTA';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
@@ -20,7 +20,7 @@ filelistMI=[];
 filelistSTA=[];
 MI_savedata=[];
 
-for z = [1 3 2 4 5]  % 5 9 13 17
+for z = [11 13 12 14 15]  % 5 9 13 17
     file = all_file(z).name;
     [pathstr, name, ext] = fileparts(file);
     directory = [pathstr,'\'];
@@ -30,12 +30,12 @@ for z = [1 3 2 4 5]  % 5 9 13 17
     TS=TimeShift;
     
     %% plot multichannel data
-    figure(2);
-    for i=1:60
-        subplot(8,8,rr(i));hold on;title(num2str(i))
-        plot(TimeShift,MI{i},'LineWidth',1,'LineStyle','-');
-        xlim([-1000 1000])
-    end
+%     figure(2);
+%     for i=1:60
+%         subplot(8,8,rr(i));hold on;title(num2str(i))
+%         plot(TimeShift,MI{i},'LineWidth',1,'LineStyle','-');
+%         xlim([-1000 1000])
+%     end
     
 %     file_onoff='F:\我的雲端硬碟\Retina exp\exp data\整理\OnOff_index\20200318-onoff2-sort-unit2onoff_index.mat';
 %     onoff_color(file_onoff)
@@ -43,15 +43,15 @@ for z = [1 3 2 4 5]  % 5 9 13 17
 %     NPcolor(file_NP)
     
     %% plot singlechannel data
-%     figure(3);hold on;box on
-%     channel=53;
-% %     title(['channel ',num2str(channel)])
-%     plot(TimeShift,MI{channel},'LineWidth',1.5,'LineStyle','-')
-%     xlim([-1000 1000])
-%     xlabel('\deltat (ms)')
-%     ylabel('MI (bits/s)')
-%     ax = gca;
-% %     ax.XGrid = 'on';
+    figure(3);hold on;box on
+    channel=7;
+%     title(['channel ',num2str(channel)])
+    plot(TimeShift,MI{channel},'LineWidth',1.5,'LineStyle','-')
+    xlim([-1000 1000])
+    xlabel('\deltat (ms)')
+    ylabel('MI (bits/s)')
+    ax = gca;
+    ax.XGrid = 'on';
 %     xline(0,'--')
     %% plot figure of every channel and STA
 %     file = all_file(filelistSTA(z)).name ;

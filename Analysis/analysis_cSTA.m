@@ -1,7 +1,7 @@
 % Analysis STA experiment, by Rona
 clear all
 close all
-datapath='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\SplitData';
+datapath='G:\§Úªº¶³ºÝµwºÐ\september_2022_expdata\20220916';
 cd(datapath);
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file); 
@@ -17,7 +17,7 @@ rr =    [9,17,25,33,41,49,...
       7,15,23,31,39,47,55,63,...
         16,24,32,40,48,56];
 roi = [1:60];
-file_numbers=[29]; % file selections 16 18 17 19 20;31 33 32 34 35;21 23 22 29 30
+file_numbers=[11 13 12 14 15]; % file selections 16 18 17 19 20;31 33 32 34 35;21 23 22 29 30
 
 colors_default={[0, 0.4470, 0.7410],[0.8500, 0.3250, 0.0980],[0.9290, 0.6940, 0.1250],[0.4940, 0.1840, 0.5560], ...
     [0.4660, 0.6740, 0.1880],[0.3010, 0.7450, 0.9330],[0.6350, 0.0780, 0.1840]};
@@ -134,7 +134,7 @@ for z = 1:size(file_numbers,2)
     for nn = 1:length(roi)
         spike = BinningSpike(roi(nn),:);
 
-        window = 2;  %STA window
+        window = 1;  %STA window
         window2 = 1;
         sts = [];
         temp = 0;
@@ -163,13 +163,13 @@ for z = 1:size(file_numbers,2)
     end
     
     % ======= plot single channel =============
-%     channel=16;
-%     figure(2);hold on;box on
-%     plot(t,STAAAAA{channel},'LineWidth',2,'color',colors_default{i_set})
-%     xlim([-window*1000 window2*1000])
-%     ylim([-1 1])
-%     xlabel('time (ms)')
-%     ylabel('STA')
+    channel=7;
+    figure(2);hold on;box on
+    plot(t,STAAAAA{channel},'LineWidth',2) %,'color',colors_default{i_set}
+    xlim([-window*1000 window2*1000])
+    ylim([-1 1])
+    xlabel('time (ms)')
+    ylabel('STA')
     
 % %======= derivative of  STA ===============
 %     for ii=1:60

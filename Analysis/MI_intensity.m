@@ -2,13 +2,13 @@
 clear all
 close all
 
-path='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\SplitData';
+path='G:\我的雲端硬碟\september_2022_expdata\20220916';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
 SamplingRate=20000;
 cc=hsv(n_file);
-file_list=[11 13 12 14 15];
+file_list=[6 8 7];
 
         rr =[9,17,25,33,41,49,...
           2,10,18,26,34,42,50,58,...
@@ -32,7 +32,7 @@ for z =1:length(file_list) %
     load([filename]);
     name(name=='_')='-';
     bin=10;  BinningInterval = bin*10^-3; 
-    backward=ceil(2000/bin); forward=ceil(2000/bin);
+    backward=ceil(1000/bin); forward=ceil(1000/bin);
 %%  TimeStamps  %%%%%%%%%%%%%%%%%%%
 %     if size(a_data,1)==1              %only find one analog channel, possibly cause by the setting in MC_rack
 %         a_data2 = a_data(1,:);
@@ -53,7 +53,7 @@ for z =1:length(file_list) %
     [b,a] = butter(2,50/20000,'low'); % set butter filter
     a_data2 = filter(b,a,a_data(1,:));
     isi = a_data2(TimeStamps(1)*20000:TimeStamps(length(TimeStamps))*20000);% figure;plot(isi);
-    figure(2);plot(isi);hold on
+    figure(2);plot(isi,'linewidth',2);hold on
  %% Spike process
 
     Spikes=Spikes(1,:);
@@ -173,7 +173,7 @@ infor=[];co=[];
     else
         
         plot(t,information,'LineWidth',1,'LineStyle','-','color',colors_default{z});%,'color',cc(z,:)
-        xlim([-2000 2000])
+        xlim([-1000 1000])
 
 %         figure(2);hold on
 %         plot(t,information,'LineWidth',2,'LineStyle','-');%,'color',cc(z,:)
