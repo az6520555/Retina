@@ -24,7 +24,7 @@ colors_default={[0, 0.4470, 0.7410],[0.8500, 0.3250, 0.0980],[0.9290, 0.6940, 0.
     [0.4660, 0.6740, 0.1880],[0.3010, 0.7450, 0.9330],[0.6350, 0.0780, 0.1840]};
 
 
-for z =1:length(file_list) 
+for z =1:length(file_list) % 
     file = all_file(file_list(z)).name ;
     [pathstr, name, ext] = fileparts(file);
     directory = [pathstr,'\'];
@@ -54,10 +54,11 @@ for z =1:length(file_list)
     a_data2 = filter(b,a,a_data(1,:));
     isi = a_data2(TimeStamps(1)*20000:TimeStamps(length(TimeStamps))*20000);% figure;plot(isi);
     figure(2);plot(isi,'linewidth',2);hold on
- %% Spike process: transfrom spike times to discrete spike trains (binning with histogram)
+ %% Spike process: transfrom spike times to discrete spike trains with binning
 
     Spikes=Spikes(1,:);
     
+ 
     BinningTime = [TimeStamps(1) : BinningInterval : TimeStamps(end)];
     BinningSpike = zeros(60,length(BinningTime));
     for i = 1:60
@@ -72,7 +73,7 @@ for z =1:length(file_list)
     BinningSpike(:,1) = 0;BinningSpike(:,end) = 0;% figure;plot(BinningTime,sum(BinningSpike),BinningTime,10*Stimuli,'o')
 %     figure;imagesc(BinningTime,[1:60],BinningSpike)
     
-    %% state of light intensity (8 states) %%% 
+    %% state of light intensity %%% 
     isi2=[];
     states=8;
     X=isi;
@@ -95,7 +96,7 @@ infor=[];co=[];
     set(gcf,'units','normalized','outerposition',[0 0 1 1])
     for nn= 1:length(roi)
         n=roi(nn);
-        Neurons = BinningSpike(n,:);
+        Neurons = BinningSpike(n,:); 
 %         Neurons = sum(BinningSpike(:,:));
          %% shuffle
 %         r=randperm(length(Neurons));
@@ -185,7 +186,7 @@ infor=[];co=[];
 %         ax.YGrid = 'on';
     end
     
-    % =====================
+    % ==================
     MI{nn} = information;
     xcor{nn} = corr;
     
@@ -193,7 +194,7 @@ infor=[];co=[];
     TimeShift=t;
     save([path,'\MIandSTA\',filename(1:end-4),'_MI.mat'],'MI','TimeShift')
 end
-
+% 
 % BinningTime = [TimeStamps(1) : 0.6 : TimeStamps(end)];
 % BinningSpike = zeros(60,length(BinningTime));
 % for i = 1:60

@@ -1,7 +1,7 @@
 % Analysis STA experiment, by Rona
 clear all
 close all
-datapath='G:\§Úªº¶³ºÝµwºÐ\september_2022_expdata\20220916';
+datapath='\\192.168.0.102\Public\Retina\Chou\Exp\20220916\SplitData';
 cd(datapath);
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file); 
@@ -163,13 +163,13 @@ for z = 1:size(file_numbers,2)
     end
     
     % ======= plot single channel =============
-    channel=7;
-    figure(2);hold on;box on
-    plot(t,STAAAAA{channel},'LineWidth',2) %,'color',colors_default{i_set}
-    xlim([-window*1000 window2*1000])
-    ylim([-1 1])
-    xlabel('time (ms)')
-    ylabel('STA')
+%     channel=7;
+%     figure(2);hold on;box on
+%     plot(t,STAAAAA{channel},'LineWidth',2) %,'color',colors_default{i_set}
+%     xlim([-window*1000 window2*1000])
+%     ylim([-1 1])
+%     xlabel('time (ms)')
+%     ylabel('STA')
     
 % %======= derivative of  STA ===============
 %     for ii=1:60

@@ -2,7 +2,7 @@
 clear all
 close all
 
-path=['F:\§Úªº¶³ºÝµwºÐ\Retina exp\exp data\Sorted_final_data\20200408'];
+path=['\\192.168.0.102\Public\Retina\Chou\Exp\data_until_2020\Sorted_final_data\20200408'];
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
@@ -19,7 +19,7 @@ cc=hsv(n_file);
             16,24,32,40,48,56];
 roi = 1:60;
 BinningInterval = 0.02;
-files=[56 50]; %56 53 50 47 17 8
+files=[56 50]; % select files
 
 
 for z = 1:length(files)

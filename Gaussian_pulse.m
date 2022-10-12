@@ -2,7 +2,7 @@
 clear all
 close all
 
-path=['F:\我的雲端硬碟\Retina exp\exp data\Sorted_final_data\20200419'];
+path=['\\192.168.0.102\Public\Retina\Chou\Exp\data_until_2020\Sorted_final_data\20200408'];
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
@@ -19,7 +19,7 @@ cc=hsv(n_file);
             16,24,32,40,48,56];
 roi = 1:60;
 BinningInterval = 0.01;
-files=[34 28]; % 25 31 28 34
+files=[1 10]; % 25 31 28 34
 
 sti_save=[];
 fr_save=[];
@@ -34,27 +34,27 @@ for z = 1:length(files)
     name(name=='_')='-';
    
 
-    % stimulus formation
+    %% stimulus formation
     t=1/SamplingRate:1/SamplingRate:length(a_data(1,:))/SamplingRate;
     sti=a_data(1,:);
     SingleSti_raw=sti(t>TimeStamps(1) & t<TimeStamps(2));
     tSingleSti=1/SamplingRate:1/SamplingRate:length(SingleSti_raw)/SamplingRate;
-    % transform stimulus from raw value to volt
+    %% transform stimulus from raw value to volt
     SingleSti_volt=(SingleSti_raw-32768).*125*10^(-6); % transfrom from raw data of MCRack to output volt
     SingleSti=SingleSti_volt;
     SingleSti=smooth(SingleSti,100);
-    % transform to real intensity
-    load('F:\我的雲端硬碟\Retina exp\exp data\temporal_pattern\20200419\calibration_PAC_19-Apr-2020.mat')
-    SingleSti=SingleSti-offset;
-    Ip=SingleSti/10.421/10^6;
-    r=0.37;
-    P=Ip/r;
-    A=13*10^-6;
-    inten=P/A*1000; % unit: mW/m^2
-    SingleSti=inten;
+    %% transform to real intensity
+%     load('F:\我的雲端硬碟\Retina exp\exp data\temporal_pattern\20200419\calibration_PAC_19-Apr-2020.mat')
+%     SingleSti=SingleSti-offset;
+%     Ip=SingleSti/10.421/10^6;
+%     r=0.37;
+%     P=Ip/r;
+%     A=13*10^-6;
+%     inten=P/A*1000; % unit: mW/m^2
+%     SingleSti=inten;
     
     
-    % Binning spikes
+    %% Binning spikes
     trial=length(TimeStamps)-1;
     SpikesSupPos=cell(1,60);
     for i=1:60
@@ -84,17 +84,17 @@ for z = 1:length(files)
     end
     
 %%     ========plot multiple arrays (add on off index)============
-%     colors={'k','r'};
-%     figure(1)
-%     for n=1:60
-%         subplot(8,8,rr(n));hold on
-%         yyaxis left
-%         plot(tBinning,FR{n},'LineWidth',1,'LineStyle','-','Color',colors{z});
-%         yyaxis right
-%         plot(tSingleSti,SingleSti,'LineWidth',1,'LineStyle','--','Color',colors{z})
-% %         xlim([0 tSingleSti(end)-2])
-%         xlim([0 2])
-%     end
+    colors={'k','r'};
+    figure(1)
+    for n=1:60
+        subplot(8,8,rr(n));hold on
+        yyaxis left
+        plot(tBinning,FR{n},'LineWidth',1,'LineStyle','-','Color',colors{z});
+        yyaxis right
+        plot(tSingleSti,SingleSti,'LineWidth',1,'LineStyle','--','Color',colors{z})
+%         xlim([0 tSingleSti(end)-2])
+        xlim([0 2])
+    end
 %     pathonoff='F:\我的雲端硬碟\Retina exp\exp data\整理\OnOff_index\';
 %     file_onoff=[pathonoff,'OU_tau=600ms_19-Apr-2020_0_sort_unit1_MI_also_other_parameters.mat'];
 %     onoff_color(file_onoff)
@@ -134,8 +134,8 @@ for z = 1:length(files)
     disp(['response delay = ',num2str(FR_peaktime(channel)-gaussian_peaktime),' second'])
     
     
-    fr_save=[fr_save tBinning(tBinning>1 & tBinning<5)'-1 FR{channel}(tBinning>1 & tBinning<5)'];
-    sti_save=[sti_save tSingleSti(tSingleSti>1 & tSingleSti<5)'-1 SingleSti(tSingleSti>1 & tSingleSti<5)];
+%     fr_save=[fr_save tBinning(tBinning>1 & tBinning<5)'-1 FR{channel}(tBinning>1 & tBinning<5)'];
+%     sti_save=[sti_save tSingleSti(tSingleSti>1 & tSingleSti<5)'-1 SingleSti(tSingleSti>1 & tSingleSti<5)];
     
 %% classify the behavior of on, on-off, off cell
 %     load('F:\我的雲端硬碟\Retina exp\exp data\整理\OnOff_index\Gonoff-20-Apr-2020-0-sort-unit1onoff_index.mat')
@@ -213,10 +213,10 @@ for z = 1:length(files)
 %     xlabel('time (s)')
 
 %% output mat data
-matname={'gaussianON.mat','gaussianOFF.mat'};
-frN=FR{32};
-save(['F:\我的雲端硬碟\Retina exp\Retina as NGD paper submit\figure 20201019 modification\',matname{z}] ...
-    ,'tBinning','frN','tSingleSti','SingleSti')
+% matname={'gaussianON.mat','gaussianOFF.mat'};
+% frN=FR{32};
+% save(['F:\我的雲端硬碟\Retina exp\Retina as NGD paper submit\figure 20201019 modification\',matname{z}] ...
+%     ,'tBinning','frN','tSingleSti','SingleSti')
 end
 % figure(287);samexaxis('abc','xmt','on','ytac','join','yld',1);
 % try

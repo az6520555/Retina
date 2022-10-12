@@ -1,4 +1,4 @@
-% Analysis STA experiment, by Rona
+% obtaining linear and nonlinear filter in LN model
 clear all
 close all
 datapath='G:\我的雲端硬碟\september_2022_expdata\20220916';
@@ -103,7 +103,7 @@ for z = 1:length(file_numbers)
         t = [-window*1000:bin:window2*1000];
         sub1=subplot(8,8,rr(nn));
         try
-            plot(t,normalize(STA),'LineWidth',1);% ,'color',colors_default{z} ,'linestyle',ls_set{i_set}
+            plot(t,STA,'LineWidth',1);% ,'color',colors_default{z} ,'linestyle',ls_set{i_set}
         catch
         end
         title(num2str(nn))
@@ -122,7 +122,7 @@ for z = 1:length(file_numbers)
     figure(2);hold on
     nonlinear_in(z,:)=gt(1:end);
     nonlinear_out(z,:)=BinningSpike(channel,length(kt_set{z}):end);
-    plot(nonlinear_in(z,:),nonlinear_out(z,:)+(z-1)*0.1,'o')
+    plot(nonlinear_in(z,:),nonlinear_out(z,:)+(z-1)*0.1,'o','LineWidth', 2)
     xlabel('g(t)')
     ylabel('N(g)')
     figure(3)

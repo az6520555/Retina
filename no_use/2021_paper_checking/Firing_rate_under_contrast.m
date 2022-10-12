@@ -6,8 +6,8 @@ all_file = dir('*.mat') ; % change the type of the files which you want to selec
 n_file = length(all_file); 
 fignames={all_file.name}; % assign name for figures
 np=50; %number of repeat of same stimuli period
-loop_ind=[6 8 7 5 9];
-xparam=[0.05 0.1 0.15 0.2 0.3];
+loop_ind=[6 8 7 5 9]; % select files 
+xparam=[0.05 0.1 0.15 0.2 0.3]; % specify the contrasts
 spike_num=zeros(length(xparam),60);
 
 for z=1:length(loop_ind)

@@ -26,5 +26,3 @@ for z = 1:n_file
         save([savepath,filename(1:end-4),'_sort_unit',num2str(u),'.mat'],'a_data','Spikes','TimeStamps')
     end
 end
-    
-    
