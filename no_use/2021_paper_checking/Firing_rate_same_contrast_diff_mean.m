@@ -1,17 +1,17 @@
 
-clear
+clearbin_pos
 close all
 cd('F:\§Úªº¶³ºÝµwºÐ\Retina exp\exp data\Spatial stimuli\20210720\merge')
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file); 
 fignames={all_file.name}; % assign name for figures
 np=50; %number of repeat of same stimuli period
-loop_ind=[25 24 23 22 21 20 15 14 17];
-xparam=[2 1 0.5 0.3 0.1 0.08 0.04 0.025 0];
-spike_num=zeros(length(loop_ind),60);
+file_list=[25 24 23 22 21 20 15 14 17];
+xparam=[2 1 0.5 0.3 0.1 0.08 0.04 0.025 0]; % background internsity
+spike_num=zeros(length(file_list),60);
 
-for z=1:length(loop_ind)
-    file = all_file(loop_ind(z)).name;
+for z=1:length(file_list)
+    file = all_file(file_list(z)).name;
     check_allfilename{z}=file;
     load(file)
     
