@@ -7,7 +7,7 @@ BinningInterval = 5/1000 ; % (s) binning duration = 5ms
 n_channel = 60;
 
 %%%%%%%%%%%%%%%%%%%%%% call all data in %%%%%%%%%%%%%%%%%%%%%%%%%% 
-cd('\\192.168.0.102\Public\Retina\Chou\Exp\20220916') ; % the folder of the files
+cd('\\192.168.0.102\Public\Retina\troy\20221013') ; % the folder of the files
 all_file = subdir('*.mcd') ;
 n_file = length(all_file) ;
 files=1:n_file;

@@ -2,13 +2,13 @@
 clear all
 close all
 
-path='G:\我的雲端硬碟\september_2022_expdata\20220916';
+path='\\192.168.0.102\Public\Retina\Chou\Exp\data_2022\20220916\SplitData';
 cd(path)
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file);
 SamplingRate=20000;
 cc=hsv(n_file);
-file_list=[6 8 7];
+file_list=[1 3 2 4 5];
 
         rr =[9,17,25,33,41,49,...
           2,10,18,26,34,42,50,58,...
@@ -71,6 +71,8 @@ for z =1:length(file_list)
     % Stimuli = n;
     BinningSpike(:,1) = 0;BinningSpike(:,end) = 0;% figure;plot(BinningTime,sum(BinningSpike),BinningTime,10*Stimuli,'o')
 %     figure;imagesc(BinningTime,[1:60],BinningSpike)
+
+    figure(1111);plot(BinningSpike(25,:));hold on
     
     %% state of light intensity (8 states) %%% 
     isi2=[];

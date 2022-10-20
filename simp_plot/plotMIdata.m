@@ -30,17 +30,17 @@ for z = [11 13 12 14 15]  % 5 9 13 17
     TS=TimeShift;
     
     %% plot multichannel data
-%     figure(2);
-%     for i=1:60
-%         subplot(8,8,rr(i));hold on;title(num2str(i))
-%         plot(TimeShift,MI{i},'LineWidth',1,'LineStyle','-');
-%         xlim([-1000 1000])
-%     end
+    figure(2);
+    for i=1:60
+        subplot(8,8,rr(i));hold on;title(num2str(i))
+        plot(TimeShift,MI{i},'LineWidth',1,'LineStyle','-');
+        xlim([-1000 1000])
+    end
     
-%     file_onoff='F:\我的雲端硬碟\Retina exp\exp data\整理\OnOff_index\20200318-onoff2-sort-unit2onoff_index.mat';
-%     onoff_color(file_onoff)
-%     file_NP='F:\我的雲端硬碟\Retina exp\exp data\整理\NP_classification\20200318_OU_tau=op5_2_sort_unit2_MI_also_other_parameters.mat'
-%     NPcolor(file_NP)
+    file_onoff='F:\我的雲端硬碟\Retina exp\exp data\整理\OnOff_index\20200318-onoff2-sort-unit2onoff_index.mat';
+    onoff_color(file_onoff)
+    file_NP='F:\我的雲端硬碟\Retina exp\exp data\整理\NP_classification\20200318_OU_tau=op5_2_sort_unit2_MI_also_other_parameters.mat'
+    NPcolor(file_NP)
     
     %% plot singlechannel data
     figure(3);hold on;box on
