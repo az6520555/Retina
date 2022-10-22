@@ -1,7 +1,7 @@
 %compare the spike trial of same stimuli
 clear
 close all
-cd('F:\§Úªº¶³ºÝµwºÐ\Retina exp\exp data\temporal pattern\20190419')
+cd('\\192.168.0.102\Public\Retina\Chou\Exp\data_until_2020\20190531')
 all_file = dir('*.mat') ; % change the type of the files which you want to select, subdir or dir.
 n_file = length(all_file); 
 fignames={all_file.name}; % assign name for figures
@@ -10,7 +10,7 @@ rest1=30;
 rest2=150;
 np1=5; %number of repeat of same stimuli period
 np2=10; % number of different stimuli period
-loop_ind=[15 14];
+loop_ind=[12];
 fig_num=0;
 rate=20000;
 
